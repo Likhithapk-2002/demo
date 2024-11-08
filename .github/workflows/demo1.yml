@@ -1,0 +1,26 @@
+
+name: Reqres API Test
+on: push
+jobs:
+  test-reqres:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Reqres API tests
+        run: npm run test:reqres
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: reqres-test-report.xml
+          path: ./test-results/reqres-test-report.xml
